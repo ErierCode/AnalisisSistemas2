@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "vana-ops-backend"
+    metrics_path: /metrics
+    static_configs:
+      # Backend corriendo en el host (Windows/Mac Docker Desktop)
+      - targets: ["host.docker.internal:4000"]
+        labels:
+          service: "vana-ops"
+          company: "VANA"
