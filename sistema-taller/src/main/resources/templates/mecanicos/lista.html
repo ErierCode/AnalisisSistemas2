@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mecanicos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+</nav>
+<div class="container">
+    <div th:if="${mensaje}" class="alert alert-ok" th:text="${mensaje}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <div class="toolbar">
+        <h1>Mecanicos</h1>
+        <a class="btn" th:href="@{/mecanicos/nuevo}">Nuevo mecanico</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Especialidad</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="m : ${mecanicos}">
+            <td th:text="${m.id}"></td>
+            <td th:text="${m.nombre}"></td>
+            <td th:text="${m.especialidad}"></td>
+            <td class="actions">
+                <a class="btn btn-secondary btn-small" th:href="@{/mecanicos/editar/{id}(id=${m.id})}">Editar</a>
+                <a class="btn btn-danger btn-small" th:href="@{/mecanicos/eliminar/{id}(id=${m.id})}"
+                   onclick="return confirm('Eliminar este mecanico?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

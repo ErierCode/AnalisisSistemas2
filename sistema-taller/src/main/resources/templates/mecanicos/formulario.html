@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Mecanico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+</nav>
+<div class="container">
+    <div class="card">
+        <h1 th:text="${titulo}">Mecanico</h1>
+        <form th:action="@{/mecanicos/guardar}" th:object="${mecanico}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <label>Nombre</label>
+            <input type="text" th:field="*{nombre}" required>
+            <label>Especialidad</label>
+            <input type="text" th:field="*{especialidad}">
+            <p style="margin-top:1rem;" class="actions">
+                <button class="btn" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/mecanicos}">Cancelar</a>
+            </p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

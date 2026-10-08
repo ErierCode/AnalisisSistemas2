@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Taller Mecanico</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+    <a th:href="@{/h2-console}" target="_blank">H2</a>
+</nav>
+<div class="container">
+    <div class="card">
+        <h1>Sistema de Taller Mecanico</h1>
+        <p class="muted">
+            Demo educativa con Spring Boot, JPA, H2, API REST y paginas HTML.
+            Gestiona clientes, vehiculos, mecanicos y ordenes de trabajo.
+        </p>
+    </div>
+    <div class="grid">
+        <a class="module-link" th:href="@{/clientes}">Clientes</a>
+        <a class="module-link" th:href="@{/vehiculos}">Vehiculos</a>
+        <a class="module-link" th:href="@{/mecanicos}">Mecanicos</a>
+        <a class="module-link" th:href="@{/ordenes}">Ordenes</a>
+    </div>
+    <div class="card">
+        <h2>API REST</h2>
+        <p class="muted">Base: <code>/api</code> — Clientes, vehiculos, mecanicos y ordenes.</p>
+        <p class="muted">Puerto: <code>8081</code></p>
+    </div>
+</div>
+</body>
+</html>

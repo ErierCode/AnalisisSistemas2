@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo} ?: 'Sistema de Taller'">Sistema de Taller</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+    <a th:href="@{/h2-console}" target="_blank">H2</a>
+</nav>
+<div class="container">
+    <div th:if="${mensaje}" class="alert alert-ok" th:text="${mensaje}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+    <div th:fragment="contenido">
+        <!-- contenido de cada pagina -->
+    </div>
+</div>
+</body>
+</html>

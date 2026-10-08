@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Vehiculos</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+</nav>
+<div class="container">
+    <div th:if="${mensaje}" class="alert alert-ok" th:text="${mensaje}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <div class="toolbar">
+        <h1>Vehiculos</h1>
+        <a class="btn" th:href="@{/vehiculos/nuevo}">Nuevo vehiculo</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Anio</th>
+            <th>Cliente</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="v : ${vehiculos}">
+            <td th:text="${v.id}"></td>
+            <td th:text="${v.placa}"></td>
+            <td th:text="${v.marca}"></td>
+            <td th:text="${v.modelo}"></td>
+            <td th:text="${v.anio}"></td>
+            <td th:text="${v.cliente != null ? v.cliente.nombre : '-'}"></td>
+            <td class="actions">
+                <a class="btn btn-secondary btn-small" th:href="@{/vehiculos/editar/{id}(id=${v.id})}">Editar</a>
+                <a class="btn btn-danger btn-small" th:href="@{/vehiculos/eliminar/{id}(id=${v.id})}"
+                   onclick="return confirm('Eliminar este vehiculo?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

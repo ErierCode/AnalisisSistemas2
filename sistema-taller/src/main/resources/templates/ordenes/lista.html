@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ordenes</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+</nav>
+<div class="container">
+    <div th:if="${mensaje}" class="alert alert-ok" th:text="${mensaje}"></div>
+    <div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
+
+    <div class="toolbar">
+        <h1>Ordenes de trabajo</h1>
+        <a class="btn" th:href="@{/ordenes/nuevo}">Nueva orden</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vehiculo</th>
+            <th>Mecanico</th>
+            <th>Descripcion</th>
+            <th>Costo</th>
+            <th>Fecha</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="o : ${ordenes}">
+            <td th:text="${o.id}"></td>
+            <td th:text="${o.vehiculo != null ? o.vehiculo.placa : '-'}"></td>
+            <td th:text="${o.mecanico != null ? o.mecanico.nombre : '-'}"></td>
+            <td th:text="${o.descripcion}"></td>
+            <td th:text="${o.costo}"></td>
+            <td th:text="${o.fechaIngreso}"></td>
+            <td><span class="badge" th:text="${o.estado}"></span></td>
+            <td class="actions">
+                <a class="btn btn-secondary btn-small" th:href="@{/ordenes/editar/{id}(id=${o.id})}">Editar</a>
+                <form th:if="${servicio.siguienteEstado(o.estado) != null}"
+                      th:action="@{/ordenes/{id}/avanzar(id=${o.id})}" method="post" style="display:inline;">
+                    <input type="hidden" name="estado" th:value="${servicio.siguienteEstado(o.estado)}">
+                    <button class="btn btn-small" type="submit"
+                            th:text="'Avanzar a ' + ${servicio.siguienteEstado(o.estado)}"></button>
+                </form>
+                <a class="btn btn-danger btn-small" th:href="@{/ordenes/eliminar/{id}(id=${o.id})}"
+                   onclick="return confirm('Eliminar esta orden?');">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

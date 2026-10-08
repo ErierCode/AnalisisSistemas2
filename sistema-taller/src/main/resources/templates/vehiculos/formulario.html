@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${titulo}">Vehiculo</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<nav class="navbar">
+    <a th:href="@{/}">Inicio</a>
+    <a th:href="@{/clientes}">Clientes</a>
+    <a th:href="@{/vehiculos}">Vehiculos</a>
+    <a th:href="@{/mecanicos}">Mecanicos</a>
+    <a th:href="@{/ordenes}">Ordenes</a>
+</nav>
+<div class="container">
+    <div class="card">
+        <h1 th:text="${titulo}">Vehiculo</h1>
+        <form th:action="@{/vehiculos/guardar}" th:object="${vehiculo}" method="post">
+            <input type="hidden" th:field="*{id}">
+            <label>Placa</label>
+            <input type="text" th:field="*{placa}" required>
+            <label>Marca</label>
+            <input type="text" th:field="*{marca}" required>
+            <label>Modelo</label>
+            <input type="text" th:field="*{modelo}" required>
+            <label>Anio</label>
+            <input type="number" th:field="*{anio}" required>
+            <label>Cliente</label>
+            <select th:field="*{clienteId}" required>
+                <option value="">Seleccione un cliente</option>
+                <option th:each="c : ${clientes}" th:value="${c.id}" th:text="${c.nombre}"></option>
+            </select>
+            <p style="margin-top:1rem;" class="actions">
+                <button class="btn" type="submit">Guardar</button>
+                <a class="btn btn-secondary" th:href="@{/vehiculos}">Cancelar</a>
+            </p>
+        </form>
+    </div>
+</div>
+</body>
+</html>
